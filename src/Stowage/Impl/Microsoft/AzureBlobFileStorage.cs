@@ -34,7 +34,7 @@ namespace Stowage.Impl.Microsoft
       }
 
       public AzureBlobFileStorage(Uri endpoint, string containerName, DelegatingHandler authHandler)
-         : base(EnsureUriEndsWithSlash(endpoint), authHandler)
+         : base(endpoint.EnsureTrailingSlash(), authHandler)
       {
          if(string.IsNullOrEmpty(containerName))
             throw new ArgumentException($"'{nameof(containerName)}' cannot be null or empty", nameof(containerName));
@@ -43,11 +43,6 @@ namespace Stowage.Impl.Microsoft
 
          _containerName = containerName;
       }
-
-      private static Uri EnsureUriEndsWithSlash(Uri endpoint) 
-         => endpoint.OriginalString.EndsWith(IOPath.PathSeparator) 
-            ? endpoint 
-            : new Uri($"{endpoint.OriginalString}{IOPath.PathSeparator}");
 
       public override Task<IReadOnlyCollection<IOEntry>> Ls(IOPath path, bool recurse = false, CancellationToken cancellationToken = default)
       {

@@ -21,7 +21,17 @@ namespace Stowage
          }
 
          string rjson = await response.Content.ReadAsStringAsync();
-
       }
+
+      /// <summary>
+      /// Ensures the given <paramref name="endpoint"/> ends in a trailing slash.
+      /// </summary>
+      /// <param name="endpoint"></param>
+      /// <returns>A formatted <see cref="Uri"/></returns>
+      public static Uri EnsureTrailingSlash(this Uri endpoint) =>
+         endpoint.OriginalString.EndsWith(IOPath.PathSeparator)
+            ? endpoint
+            : new Uri($"{endpoint.OriginalString}{IOPath.PathSeparator}");
+
    }
 }
