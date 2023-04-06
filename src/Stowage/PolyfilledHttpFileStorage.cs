@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Stowage
@@ -27,9 +27,9 @@ namespace Stowage
          };
       }
 
-      protected Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
+      protected Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken = default)
       {
-         return _http.SendAsync(request);
+         return _http.SendAsync(request, cancellationToken);
       }
 
       protected HttpResponseMessage Send(HttpRequestMessage request)
