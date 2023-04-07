@@ -10,6 +10,8 @@ namespace Stowage.Test
 
       string AzureContainerName { get; }
 
+      string AzureFilesShareName { get; }
+
       string AwsBucket { get; }
 
       string AwsKey { get; }

@@ -19,7 +19,7 @@ namespace Stowage.Impl.Microsoft
    /// </summary>
    internal class SharedKeyAuthHandler : DelegatingHandler
    {
-      private const string ServiceVersion = "2019-12-12";
+      private const string ServiceVersion = "2022-11-02";
       private const string ODataVersion = "3.0"; // https://docs.microsoft.com/en-us/rest/api/storageservices/setting-the-odata-data-service-version-headers
       private readonly string _accountName;
       private readonly string _sharedKey;

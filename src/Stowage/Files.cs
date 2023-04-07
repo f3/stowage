@@ -75,6 +75,18 @@ namespace Stowage
          return new AzureBlobFileStorage(endpoint, containerName, new SharedKeyAuthHandler(accountName, sharedKey));
       }
 
+      /// <summary>
+      /// Gets the Azure Files storage provider
+      /// </summary>
+      public static IFileStorage AzureFilesStorage(this IFilesFactory _, string accountName, string sharedKey, string shareName = null) =>
+         new AzureFilesFileStorage(accountName, shareName, new SharedKeyAuthHandler(accountName, sharedKey));
+
+      /// <summary>
+      /// Gets the Azure Files storage provider
+      /// </summary>
+      public static IFileStorage AzureFilesStorage(this IFilesFactory _, Uri endpoint, string accountName, string sharedKey, string shareName = null) =>
+         new AzureFilesFileStorage(endpoint, shareName, new SharedKeyAuthHandler(accountName, sharedKey));
+
       /*public static IFileStorage AzureTableStorage(
          this IFilesFactory _, string accountName, string sharedKey)
       {

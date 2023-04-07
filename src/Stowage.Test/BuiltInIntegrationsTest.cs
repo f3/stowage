@@ -38,6 +38,9 @@ namespace Stowage.Test.Integration
             //case "AzureTable":
             //   storage = Files.Of.AzureTableStorage(settings.AzureStorageAccount, settings.AzureStorageKey);
             //   break;
+            case "AzureFiles":
+               storage = Files.Of.AzureFilesStorage(settings.AzureStorageAccount, settings.AzureStorageKey, settings.AzureFilesShareName);
+               break;
             case "S3":
                storage = Files.Of.AmazonS3(settings.AwsBucket, settings.AwsKey, settings.AwsSecret, settings.AwsRegion);
                break;
@@ -88,6 +91,12 @@ namespace Stowage.Test.Integration
       //{
       //   return testMethod();
       //}
+
+      [Theory]
+      [StorageTestData]
+#pragma warning disable xUnit1026,IDE0060
+      public Task AzureFiles(string n, Func<Task> testMethod) => testMethod();
+#pragma warning restore xUnit1026,IDE0060
    }
 
    public class MemIntegrationTest : BuiltInIntegrationsTest

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Stowage.Impl;
 using Stowage.Impl.Databricks;
 using Stowage.Impl.Microsoft;
@@ -32,6 +30,18 @@ namespace Stowage.Factories
             if(!string.IsNullOrEmpty(sharedKey))
             {
                return new AzureBlobFileStorage(accountName, containerName, new SharedKeyAuthHandler(accountName, sharedKey));
+            }
+         }
+
+         if(connectionString.Prefix == "azfs")
+         {
+            connectionString.GetRequired(KnownParameter.AccountName, true, out string accountName);
+            connectionString.GetRequired(KnownParameter.BucketName, true, out string shareName);
+
+            string sharedKey = connectionString.Get(KnownParameter.KeyOrPassword);
+            if(!string.IsNullOrEmpty(sharedKey))
+            {
+               return new AzureFilesFileStorage(accountName, shareName, new SharedKeyAuthHandler(accountName, sharedKey));
             }
          }
 
