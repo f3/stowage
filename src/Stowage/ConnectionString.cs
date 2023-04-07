@@ -17,7 +17,7 @@ namespace Stowage
       private string _nativeConnectionString;
 
       /// <summary>
-      /// Creates a new instance of <see cref="StorageConnectionString"/>
+      /// Creates a new instance of <see cref="ConnectionString"/>
       /// </summary>
       /// <param name="connectionString"></param>
       public ConnectionString(string connectionString)
@@ -154,15 +154,15 @@ namespace Stowage
       /// <returns></returns>
       public override string ToString()
       {
-         var sb = new StringBuilder();
-         sb.Append(Prefix);
-         sb.Append(PrefixSeparator);
+         StringBuilder sb = new StringBuilder()
+            .Append(Prefix)
+            .Append(PrefixSeparator);
 
          if(IsNative)
          {
-            sb.Append(KnownParameter.Native);
-            sb.Append(PartSeparator);
-            sb.Append(Native);
+            _ = sb.Append(KnownParameter.Native)
+               .Append(PartSeparator)
+               .Append(Native);
          }
          else
          {
@@ -176,13 +176,13 @@ namespace Stowage
                }
                else
                {
-                  sb.Append(PartsSeparators);
+                  _ = sb.Append(PartsSeparators);
                   first = false;
                }
 
-               sb.Append(pair.Key);
-               sb.Append(PartSeparator);
-               sb.Append(pair.Value.UrlEncode());
+               _ = sb.Append(pair.Key)
+                  .Append(PartSeparator)
+                  .Append(pair.Value.UrlEncode());
             }
          }
 
