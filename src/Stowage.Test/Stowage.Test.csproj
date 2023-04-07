@@ -5,6 +5,7 @@
      <AssemblyOriginatorKeyFile>../fake.snk</AssemblyOriginatorKeyFile>
     <IsPackable>false</IsPackable>
     <SignAssembly>True</SignAssembly>
+    <NoWarn>CS8002<!-- CS8002: unsigned dependency (Config.Net) --></NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
